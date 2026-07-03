@@ -1,0 +1,236 @@
+.filters-card {
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.filters-card .filter-row {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    align-items: flex-end !important;
+}
+
+.filter-row .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-actions-right {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    height: 100% !important;
+}
+
+.btn-filter-apply {
+    padding: 10px 40px !important;
+    background: #0f172a !important; /* Forzar azul oscuro */
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    height: 48px !important; /* Altura fija */
+    min-width: 180px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.btn-filter-apply:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 20px;
+    padding-bottom: 5px; /* Evita el recorte del borde inferior grueso */
+}
+
+/* Estilos personalizados de DataTable */
+#gradesTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-left: 4px solid #0f172a !important;
+    border-right: 4px solid #0f172a !important;
+    border-bottom: 4px solid #0f172a !important;
+}
+
+/* Asegura que DataTables no elimine el borde inferior */
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: none !important;
+}
+
+#gradesTable thead th {
+    text-align: center;
+    padding: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-right: 3px solid rgba(255, 255, 255, 0.3); /* Divisor de encabezado aún más grueso */
+}
+
+#gradesTable thead th:last-child {
+    border-right: none;
+}
+
+.header-group.academics { background: #eff6ff; color: #1e40af; }
+.header-group.achievements { background: #fff7ed; color: #9a3412; }
+
+.sub-header th {
+    background: #f8fafc;
+    border-right: 3px solid #94a3b8; /* Divisor de subencabezado más oscuro y grueso */
+}
+
+.header-select {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.7rem;
+    background: white;
+    cursor: pointer;
+}
+
+#gradesTable tbody td {
+    border: 1px solid #e2e8f0; 
+    border-right: 3px solid #94a3b8; /* Divisor vertical más oscuro y grueso */
+    padding: 10px;
+    text-align: center;
+}
+
+.grade-input {
+    width: 110px !important; /* Forzado a ser más ancho según lo solicitado */
+    padding: 8px;
+    text-align: center;
+    font-weight: 700;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.grade-input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.grade-input.error {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: #fef2f2;
+}
+
+.achievement-check {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.prom-cell {
+    font-weight: 800;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.prom-cell.low { color: #ef4444; }
+.prom-cell.high { color: #16a34a; }
+
+/* Etiquetas de desempeño */
+.des-tag {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.des-tag.low { background: #fee2e2; color: #991b1b; }
+.des-tag.basic { background: #fef9c3; color: #854d0e; }
+.des-tag.high { background: #dcfce7; color: #166534; }
+.des-tag.excellent { background: #dbeafe; color: #1e40af; }
+
+/* Botón de guardar */
+.btn-save-row {
+    background: #0f172a;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-save-row:hover { background: #1e293b; transform: scale(1.1); }
+.btn-save-row.saved { background: #22c55e; }
+
+.def-cell {
+    font-weight: 800;
+    color: #0f172a;
+    font-size: 1rem;
+}
+
+/* Columnas de código de logro */
+.code-cell {
+    background-color: #f8fafc;
+    text-align: center;
+    width: 30px !important; 
+    min-width: 30px !important;
+    max-width: 30px !important;
+    border-left: 3px solid #94a3b8; /* Borde de columna de código más oscuro y grueso */
+    padding: 0 !important;
+}
+
+.logro-code {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 800;
+    color: #1e293b;
+    font-size: 0.75rem;
+    cursor: help;
+    display: block;
+    padding: 2px 0;
+}
+
+.code-col {
+    width: 30px !important; 
+    min-width: 30px !important;
+    background-color: #0f172a !important; 
+}
+
+/* Tooltips de error */
+.error-msg {
+    position: absolute;
+    background: #dc2626; /* Rojo más fuerte */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 100;
+    white-space: nowrap;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    pointer-events: none;
+    border: 1px solid #991b1b;
+}
+
+.error-msg::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #dc2626;
+}
+
+#gradesTable tbody td {
+    position: relative; /* Contexto para los tooltips de error */
+}

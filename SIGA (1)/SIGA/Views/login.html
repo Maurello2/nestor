@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - SIGA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/vendor/all.min.css">
+    <link rel="stylesheet" href="css/vendor/alertify.min.css">
+    <link rel="stylesheet" href="css/vendor/alertify-bootstrap.min.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-header">
+            <div class="siga-logo">
+                <img src="images/LogoSIGA.jpeg" alt="SIGA Logo">
+                <span>SIGA</span>
+            </div>
+            <h1>Sistema de Gestión Académica</h1>
+            <p>Acceso Administrativo Seguro</p>
+        </div>
+
+        <div class="login-card">
+            <a href="./" class="back-home-link"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
+            <h2 class="login-title">Iniciar Sesión</h2>
+            <p class="subtitle">Por favor, ingrese sus credenciales para acceder al portal.</p>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-role="estudiante">Estudiante</button>
+                <button class="tab-btn" data-role="docente">Docente</button>
+                <button class="tab-btn" data-role="administrador">Administrador</button>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Documento de Usuario o Correo</label>
+                    <div class="input-wrapper">
+                        <i class="far fa-user"></i>
+                        <input type="text" id="username" placeholder="ej. 123456789 o nombre@escuela.edu" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-row">
+                        <label>Contraseña</label>
+                        <a href="./recovery" class="forgot-link">¿Olvidó su contraseña?</a>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                        <button type="button" class="toggle-pass"><i class="far fa-eye"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Recordar dispositivo por 30 días
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-login">Ingresar al Portal</button>
+            </form>
+
+            <div class="login-footer">
+                <p>¿Tiene problemas para acceder? <a href="#">Contactar Soporte Técnico</a></p>
+            </div>
+        </div>
+
+        <div class="bottom-links">
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Términos de Servicio</a>
+            <span>v2.4.0</span>
+        </div>
+    </div>
+
+    <script src="js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="js/vendor/alertify.min.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

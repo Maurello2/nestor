@@ -1,0 +1,19 @@
+** Para ejecutar esta aplicación debe tener el servicio de Mysql elevado en lqa maquina y tambien el servidor de aplicaciones APACHE
+** Tambien previamente debe montar el script de la Base de Datos DBsiga.sql.
+** Para probar la aplicación, ingrese con la siguinete información
+		Usuario 79629312
+		Contraseña 202973
+** La aplicación implmenta tokens de recuperación, enviando link de página de recuperacón de contraseña, al corrw digitado.
+    ver el archivo de configuración del email mail.php este esta en la carpeta Config, de envio.
+
+** En este código, dejo correo que utilizo de prueba, recomiendo que lo cambie para sus proyectos. Se debe generar claves de aplicación,
+	esto para Gmail.
+** En esta aplicación que es gestión académica, hasta este momento esta implementando CRUD, en modulos: Gestión de usuarios, Matrículas, 
+Áreas, Logros, y Materias.
+
+** Revise el código implementado, para mejor compresión, utilicelo como ayuda, para la implementación de sus módulosm y 
+   ayuda para la evidencia #7.
+
+¡Buena Suerte!	
+
+Instructotr Néstor Guillermo Montaño Gómez

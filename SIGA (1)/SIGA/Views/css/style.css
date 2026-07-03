@@ -1,0 +1,135 @@
+:root {
+    --primary-color: #0f172a;
+    --secondary-color: #334155;
+    --accent-color: #1e293b; /* Azul oscuro */
+    --text-color: #1e293b;
+    --bg-color: #f8fafc;
+    --white: #ffffff;
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Estilos de tabla inspirados en Bootstrap */
+.table, table.dataTable {
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    border-collapse: collapse !important;
+}
+
+table.dataTable thead th {
+    background-color: #0f172a !important; /* Azul oscuro unificado */
+    color: white !important;
+    font-weight: 600;
+    padding: 12px 15px !important;
+    border-bottom: none !important;
+}
+
+table.dataTable tbody td {
+    padding: 12px 15px !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+table.dataTable.no-footer {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* Estilos de formulario inspirados en Bootstrap */
+select, input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 0.375rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    font-family: 'Inter', sans-serif; /* Se conserva la fuente */
+}
+
+select:focus, input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #0f172a; /* Azul oscuro */
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(15, 23, 42, 0.25);
+}
+
+/* Estilos de los controles de DataTables */
+.dataTables_wrapper .dataTables_length select {
+    width: auto;
+    display: inline-block;
+    padding: 2px 25px 2px 10px;
+    margin: 0 5px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    width: auto;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 0.25rem !important;
+    border: 1px solid #dee2e6 !important;
+    margin-left: 2px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #2563eb !important;
+    color: white !important;
+    border-color: #2563eb !important;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}

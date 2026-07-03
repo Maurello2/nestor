@@ -1,0 +1,164 @@
+<div class="page-header">
+    <div class="page-title">
+        <h1>Gestión de Matrículas y Alumnos</h1>
+        <p>Administre registros académicos, matrículas y perfiles personales.</p>
+    </div>
+</div>
+
+<div class="matriculas-grid">
+    <div class="matriculas-list section-card">
+        <div class="section-header-card">
+            <h3>Matrículas Registradas</h3>
+            <span class="count-badge">0 TOTAL</span>
+        </div>
+        <div class="table-responsive">
+            <table id="matriculasTable" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>NUM / ALUMNO</th>
+                        <th>CICLO / FECHA</th>
+                        <th>JORNADA / SEDE</th>
+                        <th>ESTADO</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data loaded by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="matricula-form section-card">
+        <h3>Matricular / Editar Alumno</h3>
+        <p class="form-desc">Complete los datos del registro académico</p>
+        <form id="formMatricula" class="grid-form">
+            <!-- === DATOS MATRÍCULA === -->
+            <div class="form-section-title"><i class="fas fa-id-card"></i> Datos de Matrícula</div>
+            <div class="form-row">
+                <div class="field">
+                    <label>Núm. Matrícula *</label>
+                    <input type="text" name="num_matricula" placeholder="Ej: M-2026-001" required>
+                </div>
+                <div class="field">
+                    <label>Doc. Alumno *</label>
+                    <input type="text" name="doc_alumno" placeholder="Número de documento" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="field">
+                    <label>Ciclo</label>
+                    <select name="ciclo_matricula">
+                        <option value="">Seleccionar</option>
+                        <option>Ciclo 1</option>
+                        <option>Ciclo 2</option>
+                        <option>Ciclo 3</option>
+                        <option>Ciclo 4</option>
+                        <option>Ciclo 5</option>
+                        <option>Ciclo 6</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Fecha</label>
+                    <input type="date" name="fech_matricula">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="field">
+                    <label>Jornada</label>
+                    <select name="jornada_matricula">
+                        <option value="">Seleccionar</option>
+                        <option>Mañana</option>
+                        <option>Tarde</option>
+                        <option>Noche</option>
+                        <option>Sabatina</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Sede</label>
+                    <select name="sed_matricula">
+                        <option value="">Seleccionar</option>
+                        <option>Sede Principal</option>
+                        <option>Sede Norte</option>
+                        <option>Sede Sur</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field full">
+                <label>Concepto</label>
+                <input type="text" name="concepto_matricula" placeholder="Descripción o concepto de la matrícula">
+            </div>
+            <div class="form-row triple">
+                <div class="field">
+                    <label>Estado</label>
+                    <select name="estado_matricula">
+                        <option value="Activa">Activa</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Inactiva">Inactiva</option>
+                        <option value="Cancelada">Cancelada</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Folio</label>
+                    <input type="text" name="Folio_matricula" placeholder="Folio">
+                </div>
+                <div class="field">
+                    <label>Año</label>
+                    <input type="number" name="ano" placeholder="Ej: 2026">
+                </div>
+            </div>
+            <div class="field">
+                <label>Semestre</label>
+                <select name="semestre">
+                    <option value="">Seleccionar</option>
+                    <option value="1">Semestre 1</option>
+                    <option value="2">Semestre 2</option>
+                </select>
+            </div>
+
+            <!-- === DATOS ALUMNO === -->
+            <div class="form-section-title" style="margin-top:20px;"><i class="fas fa-user-graduate"></i> Datos del Alumno</div>
+            <div class="field full">
+                <label>Nombre completo</label>
+                <input type="text" name="nom_alumno" placeholder="Nombre completo del estudiante">
+            </div>
+            <div class="form-row">
+                <div class="field">
+                    <label>Correo electrónico</label>
+                    <input type="email" name="mail_alumno" placeholder="correo@ejemplo.com">
+                </div>
+                <div class="field">
+                    <label>Teléfono</label>
+                    <input type="text" name="tele_alumno" placeholder="Número de teléfono">
+                </div>
+            </div>
+            <div class="field full">
+                <label>Dirección</label>
+                <input type="text" name="direcc_alumno" placeholder="Dirección de residencia">
+            </div>
+            <div class="form-row">
+                <div class="field">
+                    <label>Género</label>
+                    <select name="sexo_alumno">
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Estado Alumno</label>
+                    <select name="estado_alumno">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                        <option value="Graduado">Graduado</option>
+                        <option value="Retirado">Retirado</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit-matricula" id="btnSubmitMatricula">COMPLETAR MATRÍCULA</button>
+        </form>
+    </div>
+</div>
+
+<script src="js/matriculas.js"></script>

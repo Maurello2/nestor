@@ -1,0 +1,517 @@
+<style>
+    .filters-card .filter-row {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px !important;
+        align-items: flex-end !important;
+    }
+
+    .filter-row .field {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .filter-row .field label {
+        font-size: 1.1rem !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
+        margin-bottom: 5px !important;
+    }
+
+    .filter-actions-right {
+        grid-column: 1 / -1 !important; /* Span full width */
+        display: flex !important;
+        justify-content: center !important; /* Centrado solicitado */
+        margin-top: 15px !important;
+    }
+
+    .btn-filter-apply {
+        padding: 10px 40px !important;
+        background: #0f172a !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+        height: 48px !important;
+        min-width: 180px !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .grade-input {
+        width: 110px !important;
+        padding: 8px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+        border: 2px solid #cbd5e1 !important;
+        border-radius: 6px !important;
+    }
+
+    /* Error Tooltips */
+    .error-msg {
+        position: absolute !important;
+        background: #dc2626 !important;
+        color: white !important;
+        padding: 6px 12px !important;
+        border-radius: 6px !important;
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
+        z-index: 1000 !important;
+        white-space: nowrap !important;
+        top: -45px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3) !important;
+        pointer-events: none !important;
+        border: 1px solid #991b1b !important;
+    }
+
+    .error-msg::after {
+        content: "" !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        border: 6px solid transparent !important;
+        border-top-color: #dc2626 !important;
+    }
+
+    #gradesTable tbody td {
+        position: relative !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+        padding: 12px !important;
+        border-bottom: 1px solid #eee !important;
+    }
+
+    #gradesTable thead th {
+        background-color: #0f172a !important;
+        color: white !important;
+        text-align: center !important;
+        padding: 15px !important;
+        font-size: 0.85rem !important;
+    }
+
+    .btn-save-row {
+        background-color: #28a745 !important;
+        color: white !important;
+        border: none !important;
+        padding: 10px 15px !important;
+        border-radius: 6px !important;
+        font-size: 1.2rem !important;
+        cursor: pointer !important;
+        transition: all 0.3s !important;
+    }
+
+    .btn-save-row:hover {
+        background-color: #218838 !important;
+        transform: scale(1.1) !important;
+    }
+
+    .btn-view-report {
+        background-color: #0ea5e9 !important;
+        color: white !important;
+        border: none !important;
+        padding: 10px 15px !important;
+        border-radius: 6px !important;
+        font-size: 1.2rem !important;
+        cursor: pointer !important;
+        margin-left: 8px !important;
+        transition: all 0.3s !important;
+    }
+
+    .btn-view-report:hover {
+        background-color: #0284c7 !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* Modal Informe Individual */
+    .modal-reporte {
+        display: none;
+        position: fixed;
+        z-index: 3000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.6);
+        backdrop-filter: blur(5px);
+    }
+
+    .modal-reporte-content {
+        background-color: #fefefe;
+        margin: 2% auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 900px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .modal-reporte-header {
+        padding: 20px 30px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8fafc;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .modal-reporte-body {
+        padding: 30px;
+    }
+
+    .reporte-controls {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        justify-content: flex-end;
+    }
+
+    .btn-print-report {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .btn-download-report {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .reporte-paper {
+        background: white;
+        padding: 40px;
+        border: 1px solid #ddd;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .boletin-header-print {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .boletin-logo {
+        width: 80px;
+        height: auto;
+    }
+
+    .school-info h2 {
+        margin: 0;
+        font-size: 1.4rem;
+    }
+
+    .report-title {
+        margin: 15px 0;
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
+        padding: 8px 0;
+    }
+
+    .student-info-print {
+        text-align: left;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+    }
+
+    .info-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .grading-table-report {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .grading-table-report th, .grading-table-report td {
+        border: 1px solid #000;
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .grading-table-report th {
+        background-color: #f1f5f9;
+    }
+
+    @media print {
+        body * { visibility: hidden; }
+        #reportePrintArea, #reportePrintArea * { visibility: visible; }
+        #reportePrintArea { position: absolute; left: 0; top: 0; width: 100%; }
+    }
+</style>
+
+<div class="page-header">
+    <div class="page-title">
+        <h1>Gestión de Calificaciones</h1>
+        <p>Filtre y gestione las notas bimestrales por ciclo y jornada.</p>
+    </div>
+</div>
+
+<div class="card filters-card">
+    <div class="filter-row">
+        <!-- Row 1: Contexto Académico -->
+        <div class="field">
+            <label><i class="fas fa-university"></i> Sede</label>
+            <select class="form-select" id="filterSede">
+                <option value="">Seleccione...</option>
+                <option>Bogotá</option>
+                <option>Funza</option>
+                <option>Soacha</option>
+            </select>
+        </div>
+        <div class="field">
+            <label><i class="fas fa-clock"></i> Jornada</label>
+            <select class="form-select" id="filterJornada">
+                <option value="">Seleccione...</option>
+                <option>Diurno</option>
+                <option>Nocturno</option>
+                <option>Semipresencial</option>
+            </select>
+        </div>
+        <div class="field">
+            <label><i class="fas fa-layer-group"></i> Ciclo</label>
+            <select class="form-select" id="filterCiclo">
+                <option value="">Seleccione...</option>
+                <option>Ciclo 1</option>
+                <option>Ciclo 2</option>
+                <option>Ciclo 3A</option>
+                <option>Ciclo 3B</option>
+                <option>Ciclo 4A</option>
+                <option>Ciclo 4B</option>
+                <option>Ciclo 5</option>
+                <option>Ciclo 6</option>
+            </select>
+        </div>
+        <div class="field">
+            <label><i class="fas fa-calendar-check"></i> Semestre</label>
+            <select class="form-select" id="filterSemestre">
+                <option value="">Seleccione...</option>
+                <option>Semestre 1</option>
+                <option>Semestre 2</option>
+            </select>
+        </div>
+
+        <!-- Row 2: Periodo, Materia y Docente -->
+        <div class="field">
+            <label><i class="fas fa-history"></i> Año</label>
+            <select class="form-select" id="filterAnio">
+                <option value="">Seleccione...</option>
+                <option>2022</option>
+                <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
+                <option>2026</option>
+            </select>
+        </div>
+        <div class="field">
+            <label><i class="fas fa-calendar-alt"></i> Periodo</label>
+            <select class="form-select" id="filterPeriodo">
+                <option value="">Seleccione...</option>
+            </select>
+        </div>
+        <div class="field">
+            <label><i class="fas fa-book"></i> Asignatura</label>
+            <select class="form-select" id="filterMateria">
+                <option value="">Seleccione...</option>
+                <option>Matemáticas</option>
+                <option>Español</option>
+                <option>Biología</option>
+                <option>Química</option>
+                <option>Física</option>
+                <option>Ética</option>
+            </select>
+        </div>
+        <div class="field">
+            <label><i class="fas fa-user-tie"></i> Docente</label>
+            <select class="form-select" id="filterDocente">
+                <option value="">Seleccione...</option>
+                <option value="12345678">Juan Pérez</option>
+                <option value="87654321">María Rodríguez</option>
+                <option value="45678912">Carlos López</option>
+                <option value="21987654">Ana Martínez</option>
+            </select>
+        </div>
+
+        <!-- Row 3: Acciones -->
+        <div class="filter-actions-right">
+            <button class="btn-filter-apply" id="btnMostrarGrupo"><i class="fas fa-users"></i> Mostrar Grupo</button>
+        </div>
+    </div>
+</div>
+
+<div class="card table-card">
+    <div class="table-header-info">
+        <h2 id="planillaTitle">Planilla de Notas de</h2>
+        <div class="table-actions">
+            <button class="btn-action export"><i class="fas fa-file-excel"></i> Exportar</button>
+            <button class="btn-action print"><i class="fas fa-print"></i> Imprimir</button>
+        </div>
+    </div>
+
+    <div class="section-header-card-row">
+        <div class="table-legend">
+            <div class="legend-item"><span class="dot primary"></span> 4.0 - 5.0 Alto/Excel.</div>
+            <div class="legend-item"><span class="dot warning"></span> 0.0 - 2.9 Bajo</div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table id="gradesTable" class="display nowrap" style="width:100%">
+            <thead>
+                <tr class="main-header">
+                    <th rowspan="2">ESTUDIANTE</th>
+                    <th rowspan="2">DOCUMENTO</th>
+                    <th colspan="2">
+                        <select class="header-select" data-column="2">
+                            <option value="">LOGRO 1...</option>
+                            <option value="101">Identifica conceptos básicos</option>
+                            <option value="102">Aplica fórmulas correctamente</option>
+                        </select>
+                    </th>
+                    <th colspan="2">
+                        <select class="header-select" data-column="4">
+                            <option value="">LOGRO 2...</option>
+                            <option value="201">Resuelve problemas complejos</option>
+                            <option value="202">Analiza variables críticas</option>
+                        </select>
+                    </th>
+                    <th colspan="2">
+                        <select class="header-select" data-column="6">
+                            <option value="">LOGRO 3...</option>
+                            <option value="301">Trabajo en equipo</option>
+                            <option value="302">Liderazgo de proyectos</option>
+                        </select>
+                    </th>
+                    <th colspan="2">
+                        <select class="header-select" data-column="8">
+                            <option value="">LOGRO 4...</option>
+                            <option value="401">Uso de herramientas TIC</option>
+                            <option value="402">Innovación creativa</option>
+                        </select>
+                    </th>
+                    <th colspan="2">
+                        <select class="header-select" data-column="10">
+                            <option value="">LOGRO 5...</option>
+                            <option value="501">Ética y valores</option>
+                            <option value="502">Puntualidad y entrega</option>
+                        </select>
+                    </th>
+                    <th rowspan="2">DEF.</th>
+                    <th rowspan="2">A. HRS</th>
+                    <th rowspan="2">DESEMPEÑO</th>
+                    <th rowspan="2">ACCIONES</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>Nota</th> <th>Cód</th>
+                    <th>Nota</th> <th>Cód</th>
+                    <th>Nota</th> <th>Cód</th>
+                    <th>Nota</th> <th>Cód</th>
+                    <th>Nota</th> <th>Cód</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal para Informe Individual -->
+<div id="modalReporte" class="modal-reporte">
+    <div class="modal-reporte-content">
+        <div class="modal-reporte-header">
+            <h3><i class="fas fa-file-alt"></i> Informe de Calificación Detallada</h3>
+            <span class="close-reporte-modal" style="cursor:pointer; font-size: 24px;">&times;</span>
+        </div>
+        <div class="modal-reporte-body">
+            <div class="reporte-controls">
+                <button class="btn-print-report" onclick="window.print()"><i class="fas fa-print"></i> Imprimir</button>
+                <button class="btn-download-report"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+            </div>
+            
+            <div id="reportePrintArea" class="reporte-paper">
+                <div class="boletin-header-print">
+                    <div class="header-top">
+                        <img src="images/logoceis.jpg" alt="Logo" class="boletin-logo">
+                        <div class="school-info">
+                            <h2>COLEGIO C.E.I.S.</h2>
+                            <p>INFORME INDIVIDUAL DE CALIFICACIONES</p>
+                        </div>
+                        <img src="images/logoceis.jpg" alt="Logo" class="boletin-logo">
+                    </div>
+                    
+                    <h3 style="text-align: center; margin: 20px 0;" id="reporteMateria">---</h3>
+
+                    <div class="student-info-print">
+                        <div class="info-row" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                            <span><strong>SEDE:</strong> <span id="repSede">---</span></span>
+                            <span><strong>JORNADA:</strong> <span id="repJornada">---</span></span>
+                            <span><strong>ALUMNO:</strong> <span id="repAlumno">---</span></span>
+                            <span><strong>CICLO:</strong> <span id="repCiclo">---</span></span>
+                            <span><strong>PERIODO:</strong> <span id="repPeriodo">---</span></span>
+                            <span><strong>AÑO:</strong> <span id="repAnio">---</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="grading-table-report">
+                    <thead>
+                        <tr>
+                            <th>LOGRO</th>
+                            <th>DESCRIPCIÓN / CÓDIGO</th>
+                            <th>NOTA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reporteGradesBody">
+                        <!-- Dynamic content -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2" style="text-align: right;"><strong>DEFINITIVA:</strong></td>
+                            <td id="repDefinitiva">0.0</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: right;"><strong>DESEMPEÑO:</strong></td>
+                            <td id="repDesempeno">---</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: right;"><strong>AUSENCIAS:</strong></td>
+                            <td id="repAusencias">0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/calificaciones.js"></script>

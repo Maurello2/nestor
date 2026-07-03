@@ -1,0 +1,199 @@
+<div class="page-header">
+    <div class="page-title">
+        <h1>Resumen del Sistema</h1>
+        <p>Bienvenido de nuevo, Dr. Vance. Esto es lo que está sucediendo hoy en Academic Pro.</p>
+    </div>
+    <div class="page-actions">
+        <button class="btn-outline"><i class="fas fa-download"></i> Exportar Datos</button>
+        <button class="btn-primary-dashboard"><i class="fas fa-plus"></i> Nuevo Registro</button>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card-dashboard">
+        <div class="stat-icon students"><i class="fas fa-users"></i></div>
+        <div class="stat-data">
+            <span class="label">Total de Estudiantes</span>
+            <div class="value-row">
+                <span class="value">12,482</span>
+                <span class="trend positive">+12%</span>
+            </div>
+        </div>
+    </div>
+    <div class="stat-card-dashboard">
+        <div class="stat-icon enrollments"><i class="fas fa-id-card"></i></div>
+        <div class="stat-data">
+            <span class="label">Matrículas Activas</span>
+            <div class="value-row">
+                <span class="value">8,941</span>
+                <span class="trend neutral">Estable</span>
+            </div>
+        </div>
+    </div>
+    <div class="stat-card-dashboard">
+        <div class="stat-icon grades"><i class="fas fa-clipboard-list"></i></div>
+        <div class="stat-data">
+            <span class="label">Calificaciones Pendientes</span>
+            <div class="value-row">
+                <span class="value">412</span>
+                <span class="trend negative">Atención</span>
+            </div>
+        </div>
+    </div>
+    <div class="stat-card-dashboard">
+        <div class="stat-icon teachers"><i class="fas fa-broadcast-tower"></i></div>
+        <div class="stat-data">
+            <span class="label">Profesores en Línea</span>
+            <div class="value-row">
+                <span class="value">58</span>
+                <span class="trend live">En vivo</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-grid">
+    <div class="grid-left">
+        <div class="section-card">
+            <div class="section-header-card">
+                <h3>Registros Recientes de Estudiantes</h3>
+                <a href="#" class="view-all">Ver Todo</a>
+            </div>
+            <table id="recentStudents" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>NOMBRE DEL ESTUDIANTE</th>
+                        <th>CURSO</th>
+                        <th>FECHA</th>
+                        <th>ESTADO</th>
+                        <th>ACCIÓN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be loaded via AJAX/DataTable -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-card">
+            <div class="section-header-card">
+                <h3>Tendencias de Inscripción</h3>
+                <select class="time-filter">
+                    <option>Últimos 6 Meses</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <!-- Placeholder for Chart -->
+                <div class="dummy-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-right">
+        <div class="side-card calendar-card">
+            <div class="side-card-header">
+                <h3>Calendario Académico</h3>
+                <i class="far fa-calendar-alt"></i>
+            </div>
+            <div class="calendar-events">
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="month">OCT</span>
+                        <span class="day">28</span>
+                    </div>
+                    <div class="event-info">
+                        <strong>Reunión del Consejo de Facultad</strong>
+                        <span>Boardroom A, 10:00 AM</span>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="month">NOV</span>
+                        <span class="day">02</span>
+                    </div>
+                    <div class="event-info">
+                        <strong>Ingreso de Notas Parciales</strong>
+                        <span>Deadline: 11:59 PM</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-full-width">Calendario Completo</button>
+        </div>
+
+        <div class="side-card status-card">
+            <div class="side-card-header">
+                <h3>Estado del Sistema</h3>
+                <i class="fas fa-check-circle status-ok"></i>
+            </div>
+            <div class="status-items">
+                <div class="status-row">
+                    <span>Sincronización de Base de Datos</span>
+                    <span class="status-badge success">Activo</span>
+                </div>
+                <div class="load-bar">
+                    <div class="load-info">
+                        <span>Carga del Servidor</span>
+                        <span>22%</span>
+                    </div>
+                    <div class="progress"><div class="bar" style="width: 22%"></div></div>
+                </div>
+            </div>
+            <p class="last-maint">Último mantenimiento realizado: 20 de oct. de 2023</p>
+        </div>
+
+        <div class="side-card help-card">
+            <div class="help-content">
+                <h3>¿Necesita ayuda?</h3>
+                <p>Contacte al soporte técnico de TI para recibir ayuda con el portal académico.</p>
+                <button class="btn-white">Contactar Soporte Técnico</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Recent Students DataTable (if exists)
+    if ($.fn.DataTable.isDataTable('#recentStudents')) {
+        $('#recentStudents').DataTable().destroy();
+    }
+    
+    $('#recentStudents').DataTable({
+        data: [
+            { name: 'Elena Martinez', initial: 'EM', course: 'B.Sc. Computer Science', date: 'Oct 24, 2023', status: 'Verificado', class: 'verified' },
+            { name: 'Julian Dawson', initial: 'JD', course: 'M.A. Applied Linguistics', date: 'Oct 23, 2023', status: 'En Revisión', class: 'review' },
+            { name: 'Sarah Lund', initial: 'SL', course: 'B.A. Architecture', date: 'Oct 22, 2023', status: 'Verificado', class: 'verified' },
+            { name: 'Kevin Thorne', initial: 'KT', course: 'M.Sc. Mathematics', date: 'Oct 21, 2023', status: 'En Espera', class: 'waiting' }
+        ],
+        columns: [
+            { 
+                data: 'name',
+                render: function(data, type, row) {
+                    return `
+                        <div class="student-cell">
+                            <div class="avatar-sm">${row.initial}</div>
+                            <span>${data}</span>
+                        </div>
+                    `;
+                }
+            },
+            { data: 'course' },
+            { data: 'date' },
+            { 
+                data: 'status',
+                render: function(data, type, row) {
+                    return `<span class="status-tag ${row.class}">${data}</span>`;
+                }
+            },
+            { 
+                data: null, 
+                defaultContent: '<button class="icon-btn"><i class="fas fa-ellipsis-v"></i></button>',
+                orderable: false
+            }
+        ],
+        paging: false,
+        searching: false,
+        info: false,
+        order: [[2, 'desc']],
+        language: window.datatablesSpanish
+    });
+</script>

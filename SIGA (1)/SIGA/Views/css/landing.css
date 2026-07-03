@@ -1,0 +1,283 @@
+:root {
+    --glass-bg: rgba(224, 239, 255, 0.95);
+    --glass-border: rgba(15, 23, 42, 0.1);
+    --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    --water-bg: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.45) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(15, 23, 42, 0.35) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(37, 99, 235, 0.4) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(15, 23, 42, 0.3) 0px, transparent 50%),
+                linear-gradient(180deg, #8cbdf5 0%, #ffffff 100%);
+}
+
+body {
+    zoom: 85%; /* Establece un zoom específico para index.html */
+    background: #8cbdf5 !important;
+    background-image: var(--water-bg) !important;
+    background-attachment: fixed;
+    color: #0f172a;
+    position: relative;
+}
+
+/* Superposición de desenfoque para el efecto "agua" */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://www.transparenttextures.com/patterns/cubes.png");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 5000;
+    transition: all 0.3s ease;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    z-index: 5001;
+}
+
+.logo img {
+    height: 150px; /* Aún más grande */
+    width: auto;
+    background: #8cbdf5; /* Coincide con el fondo de la página */
+    padding: 0; /* Rellena la caja */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border: 3px solid white;
+    transition: transform 0.3s ease;
+    object-fit: contain;
+}
+
+.logo:hover img {
+    transform: scale(1.05);
+}
+
+.logo-text-full {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    max-width: 250px;
+    line-height: 1.1;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #475569;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: #2563eb;
+}
+
+.btn-portal {
+    background: var(--primary-gradient);
+    color: white !important;
+    padding: 10px 22px; /* Tamaño ajustado */
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-portal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.3);
+}
+
+/* Botón de menú móvil */
+.mobile-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: #0f172a;
+    cursor: pointer;
+    z-index: 5001;
+}
+
+/* Encabezado responsivo */
+@media (max-width: 1024px) {
+    .logo img {
+        height: 80px;
+    }
+    .logo-text-full {
+        display: none; /* Oculta el texto largo en móviles para ahorrar espacio */
+    }
+    .mobile-toggle {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+        z-index: 5000;
+        gap: 40px;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+    }
+
+    .btn-portal {
+        display: none; /* Oculta en la navegación móvil o se mueve dentro del menú */
+    }
+    
+    .nav-links .btn-portal-mobile {
+        display: block;
+        margin-top: 20px;
+    }
+}
+
+/* Refinamiento de la imagen principal (hero) */
+.hero-image {
+    max-width: 700px; /* Tamaño incrementado */
+    margin: 0 auto;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+/* Efecto persiana */
+.shutter-section {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shutter-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sedes como tarjetas estilo tabla */
+.sedes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0; /* Sensación de tabla */
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+}
+
+.sede-card {
+    border: 1px solid #f1f5f9;
+    padding: 30px;
+    transition: background 0.3s;
+    text-align: center;
+}
+
+.sede-card:hover {
+    background: #f8fafc;
+}
+
+.sede-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+    border: 4px solid #e2e8f0;
+}
+
+/* Estilos de centrado de la sección principal (hero) */
+.hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 100px 0 !important;
+    gap: 40px !important;
+    width: 100% !important;
+}
+
+.hero-content {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+}
+
+.hero-content h1 {
+    font-size: 2.2rem !important; /* Tamaño reducido */
+    margin-bottom: 25px !important;
+    line-height: 1.2 !important;
+    color: #0f172a !important;
+}
+
+.hero-content p {
+    font-size: 1.4rem !important;
+    margin-bottom: 40px !important;
+    opacity: 1 !important;
+    color: #1e293b !important;
+}
+
+.hero-btns {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 25px !important;
+}

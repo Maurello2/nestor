@@ -1,0 +1,152 @@
+<div class="page-header">
+    <div class="page-title">
+        <h1>Administrar Usuarios</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" data-page="home.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="breadcrumb-item active">Administrar usuarios</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="card table-card">
+        <div class="card-header-actions">
+            <button class="btn-primary-dashboard" id="btnAgregarUsuario">
+                <i class="fas fa-plus-circle"></i> Agregar usuario
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table id="usuariosTable" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Foto</th>
+                        <th>Perfil</th>
+                        <th>Estado</th>
+                        <th>Último login</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data populated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar Usuario -->
+<div id="modalAgregarUsuario" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-user-plus"></i> Agregar usuario</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <form id="formAgregarUsuario">
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-user"></i></span>
+                    <input type="text" placeholder="Ingresar nombre" name="nuevoNombre" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-key"></i></span>
+                    <input type="text" placeholder="Ingresar usuario" name="nuevoUsuario" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-lock"></i></span>
+                    <input type="password" placeholder="Ingresar contraseña" name="nuevoPassword" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-users-cog"></i></span>
+                    <select name="nuevoPerfil" required>
+                        <option value="">Seleccionar perfil</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Especial">Especial</option>
+                        <option value="Vendedor">Vendedor</option>
+                    </select>
+                </div>
+                
+                <div class="upload-section">
+                    <label>SUBIR FOTO</label>
+                    <input type="file" class="nuevaFoto" name="nuevaFoto" accept="image/*">
+                    <p class="help-block">Peso máximo de la foto 2MB</p>
+                    <div class="photo-preview">
+                        <img src="https://ui-avatars.com/api/?name=User&background=f1f5f9&color=94a3b8" class="previsualizar" alt="Preview">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal-btn">Salir</button>
+                <button type="submit" class="btn btn-primary">Guardar usuario</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Editar Usuario -->
+<div id="modalEditarUsuario" class="modal">
+    <div class="modal-content">
+        <div class="modal-header edit">
+            <h2><i class="fas fa-user-edit"></i> Editar usuario</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <form id="formEditarUsuario">
+            <div class="modal-body">
+                <input type="hidden" id="editarDocUsuario" name="editarDocUsuario">
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-user"></i></span>
+                    <input type="text" id="editarNombre" name="editarNombre" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-key"></i></span>
+                    <input type="text" id="editarUsuario" name="editarUsuario" placeholder="Documento / Usuario" readonly>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                    <input type="email" id="editarEmail" name="editarEmail" placeholder="Correo electrónico">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-lock"></i></span>
+                    <input type="password" placeholder="Escriba la nueva contraseña" name="editarPassword">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-users-cog"></i></span>
+                    <select id="editarPerfil" name="editarPerfil" required>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Docente">Docente</option>
+                        <option value="Estudiante">Estudiante</option>
+                        <option value="Especial">Especial</option>
+                        <option value="Vendedor">Vendedor</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-toggle-on"></i></span>
+                    <select id="editarEstado" name="editarEstado" required>
+                        <option value="Activado">Activado</option>
+                        <option value="Desactivado">Desactivado</option>
+                    </select>
+                </div>
+                
+                <div class="upload-section">
+                    <label>SUBIR FOTO</label>
+                    <input type="file" class="nuevaFoto" name="editarFoto" accept="image/*">
+                    <p class="help-block">Peso máximo de la foto 2MB</p>
+                    <div class="photo-preview">
+                        <img src="" class="previsualizar" id="fotoActual" alt="Preview">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal-btn">Salir</button>
+                <button type="submit" class="btn btn-primary">Modificar usuario</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/usuarios.js"></script>

@@ -1,0 +1,174 @@
+<div class="page-header">
+    <div class="page-title">
+        <h1>Administrar Materias</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" data-page="home.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="breadcrumb-item active">Curriculo / Materias</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="card table-card">
+        <div class="card-header-actions">
+            <button class="btn-primary-dashboard" id="btnAgregarMateria">
+                <i class="fas fa-plus-circle"></i> Agregar materia
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table id="materiasTable" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Cód.</th>
+                        <th>Nombre</th>
+                        <th>Área</th>
+                        <th>Ciclo</th>
+                        <th>Estado</th>
+                        <th>Orden</th>
+                        <th>H.S.</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar Materia -->
+<div id="modalAgregarMateria" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-book"></i> Agregar materia</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <form id="formAgregarMateria">
+            <div class="modal-body">
+                <div class="input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-hashtag"></i></span>
+                        <input type="number" placeholder="Cód. Materia" name="nuevoCodMateria" required>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-sort-numeric-down"></i></span>
+                        <input type="number" placeholder="Orden" name="nuevoOrdenMateria" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-font"></i></span>
+                    <input type="text" placeholder="Nombre de la materia" name="nuevoNomMateria" required>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-layer-group"></i></span>
+                    <select name="nuevoCodArea" id="selectAreaMateria" required>
+                        <option value="">Seleccionar Área</option>
+                        <!-- Dynamic options -->
+                    </select>
+                </div>
+
+                <div class="input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-sync"></i></span>
+                        <select name="nuevoCicloMateria" required>
+                            <option value="">Ciclo</option>
+                            <option>Ciclo 1</option>
+                            <option>Ciclo 2</option>
+                            <option>Ciclo 3</option>
+                            <option>Ciclo 4</option>
+                            <option>Ciclo 5</option>
+                            <option>Ciclo 6</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-clock"></i></span>
+                        <input type="text" placeholder="Horas Sem." name="nuevoHorasSemanales" maxlength="3" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-toggle-on"></i></span>
+                    <select name="nuevoEstadoMateria" required>
+                        <option value="Activado">Activado</option>
+                        <option value="Desactivado">Desactivado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal-btn">Salir</button>
+                <button type="submit" class="btn btn-primary">Guardar materia</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Editar Materia -->
+<div id="modalEditarMateria" class="modal">
+    <div class="modal-content">
+        <div class="modal-header edit">
+            <h2><i class="fas fa-edit"></i> Editar materia</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <form id="formEditarMateria">
+            <div class="modal-body">
+                <input type="hidden" id="editarCodMateria" name="editarCodMateria">
+                
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-font"></i></span>
+                    <input type="text" id="editarNomMateria" name="editarNomMateria" required>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-layer-group"></i></span>
+                    <select id="editarCodAreaMateria" name="editarCodArea" required>
+                        <!-- Dynamic -->
+                    </select>
+                </div>
+
+                <div class="input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-sync"></i></span>
+                        <select id="editarCicloMateria" name="editarCicloMateria" required>
+                            <option>Ciclo 1</option>
+                            <option>Ciclo 2</option>
+                            <option>Ciclo 3</option>
+                            <option>Ciclo 4</option>
+                            <option>Ciclo 5</option>
+                            <option>Ciclo 6</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-clock"></i></span>
+                        <input type="text" id="editarHorasSemanales" name="editarHorasSemanales" maxlength="3" required>
+                    </div>
+                </div>
+
+                <div class="input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-sort-numeric-down"></i></span>
+                        <input type="number" id="editarOrdenMateria" name="editarOrdenMateria" required>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-toggle-on"></i></span>
+                        <select id="editarEstadoMateria" name="editarEstadoMateria" required>
+                            <option value="Activado">Activado</option>
+                            <option value="Desactivado">Desactivado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal-btn">Salir</button>
+                <button type="submit" class="btn btn-primary">Modificar materia</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/materias.js"></script>

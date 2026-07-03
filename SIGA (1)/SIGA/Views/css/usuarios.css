@@ -1,0 +1,218 @@
+/* Estilos del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    overflow: hidden;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    background: #0f172a; /* Azul oscuro institucional */
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.modal-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.close-modal {
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.close-modal:hover { opacity: 1; }
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    padding: 15px 25px;
+    background: #f8fafc;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Grupos de entrada (input) */
+.input-group {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #d2d6de;
+    border-radius: 4px;
+}
+
+.input-icon {
+    background: #f4f4f4;
+    padding: 10px 15px;
+    border-right: 1px solid #d2d6de;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+}
+
+.input-group input, .input-group select {
+    border: none;
+    padding: 10px 15px;
+    width: 100%;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+.input-group select {
+    background: white;
+    cursor: pointer;
+}
+
+/* Sección de subida de archivos */
+.upload-section {
+    margin-top: 15px;
+}
+
+.upload-section label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.help-block {
+    font-size: 0.75rem;
+    color: #777;
+    margin: 5px 0 10px;
+}
+
+.photo-preview {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #d2d6de;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f1f5f9;
+}
+
+.previsualizar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Insignias de estado */
+.badge-status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+.badge-status.active { background: #00a65a; } /* Verde */
+.badge-status.inactive { background: #dd4b39; } /* Rojo */
+
+/* Sobrescritura de estilos de la tabla */
+#usuariosTable_wrapper {
+    padding: 20px 0;
+}
+
+.img-thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    object-fit: cover;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-edit {
+    background: #f39c12;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.btn-delete {
+    background: #dd4b39;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* Estilos personalizados de Alertify */
+.alertify .ajs-dialog {
+    border-radius: 12px;
+}
+
+.alertify-custom-confirm {
+    text-align: center;
+    padding: 20px;
+}
+
+.alertify-icon-warning {
+    font-size: 80px;
+    color: #f8bb86;
+    margin-bottom: 20px;
+}
+
+.alertify-custom-confirm h3 {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.alertify-custom-confirm p {
+    font-size: 1.1rem;
+    color: #777;
+}
+
+/* Sobrescritura de botones de Alertify */
+.alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
+    background-color: #3085d6 !important;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.alertify .ajs-footer .ajs-buttons .ajs-button.ajs-cancel {
+    background-color: #d33 !important;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: 600;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - SIGA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/vendor/all.min.css">
+    <link rel="stylesheet" href="css/vendor/alertify.min.css">
+    <link rel="stylesheet" href="css/vendor/alertify-bootstrap.min.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="recovery-icon" style="color: white; font-size: 3rem; margin-bottom: 20px;">
+            <i class="fas fa-undo-alt"></i>
+        </div>
+        
+        <div class="login-card">
+            <h2 style="text-align: center;">¿Olvidaste tu contraseña?</h2>
+            <p class="subtitle" style="text-align: center;">Ingresa tu correo electrónico para recibir un enlace de recuperación</p>
+
+            <form id="recoveryForm">
+                <div class="form-group">
+                    <label>CORREO ELECTRÓNICO</label>
+                    <div class="input-wrapper">
+                        <i class="far fa-envelope"></i>
+                        <input type="email" id="email" placeholder="ejemplo@institucion.edu" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login" style="margin-top: 20px;">Enviar Instrucciones</button>
+            </form>
+
+            <div class="login-footer">
+                <a href="./login" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fas fa-arrow-left"></i> Volver al Inicio de Sesión
+                </a>
+            </div>
+        </div>
+
+        <div class="bottom-links">
+            <span>© 2024 Academic Pro. Institutional Reliability.</span>
+        </div>
+    </div>
+
+    <script src="js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="js/vendor/alertify.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#recoveryForm').on('submit', function(e) {
+                e.preventDefault();
+
+                const email = $('#email').val().trim();
+                const submitBtn = $(this).find('button[type="submit"]');
+                const originalText = submitBtn.text();
+
+                if (!email) {
+                    alertify.error('Por favor ingrese su correo electrónico');
+                    return;
+                }
+
+                submitBtn.prop('disabled', true).text('Enviando...');
+
+                $.post('./api/recovery', { email: email }, function(response) {
+                    if (response.status === 'success') {
+                        alertify.success(response.message || 'Enlace de recuperación enviado a su correo');
+                    } else {
+                        alertify.error(response.message || 'No se pudo enviar el enlace');
+                    }
+                }, 'json').fail(function() {
+                    alertify.error('Error del servidor');
+                }).always(function() {
+                    submitBtn.prop('disabled', false).text(originalText);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

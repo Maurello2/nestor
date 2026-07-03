@@ -1,0 +1,501 @@
+<div class="page-header">
+    <div class="page-title">
+        <h1><i class="fas fa-print"></i> Impresión de Boletines</h1>
+        <p>Seleccione los filtros para generar y descargar los boletines informativos.</p>
+    </div>
+</div>
+
+<div class="card filters-card">
+    <div class="filter-row">
+        <div class="field">
+            <label>Ciclo:</label>
+            <select class="form-select" id="filterCiclo">
+                <option value="">Seleccione ciclo---></option>
+                <option value="Ciclo 1">Ciclo 1</option>
+                <option value="Ciclo 2">Ciclo 2</option>
+                <option value="Ciclo 3A">Ciclo 3A</option>
+                <option value="Ciclo 3B">Ciclo 3B</option>
+                <option value="Ciclo 4A">Ciclo 4A</option>
+                <option value="Ciclo 4B">Ciclo 4B</option>
+                <option value="Ciclo 5">Ciclo 5</option>
+                <option value="Ciclo 6">Ciclo 6</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Jornada:</label>
+            <select class="form-select" id="filterJornada">
+                <option value="">Seleccione jornada---></option>
+                <option value="Diurna">Diurna</option>
+                <option value="Nocturna">Nocturna</option>
+                <option value="Fines de Semana">Fines de Semana</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Periodo:</label>
+            <select class="form-select" id="filterPeriodo">
+                <option value="">Seleccione Periodo---></option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Sede:</label>
+            <select class="form-select" id="filterSede">
+                <option value="">Seleccione sede---></option>
+                <option value="Funza">Funza</option>
+                <option value="Bogotá">Bogotá</option>
+                <option value="Soacha">Soacha</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Semestre:</label>
+            <select class="form-select" id="filterSemestre">
+                <option value="">Seleccione Semestre-></option>
+                <option value="1">Semestre 1</option>
+                <option value="2">Semestre 2</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Año:</label>
+            <select class="form-select" id="filterAnio">
+                <option value="">Seleccione Año-></option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+            </select>
+        </div>
+        <div class="filter-actions-right">
+            <button class="btn-mostrar-grupo" id="btnMostrarGrupoBoletines"><i class="fas fa-users"></i> Mostrar Grupo</button>
+        </div>
+    </div>
+</div>
+
+<div class="card table-card">
+    <div class="table-responsive">
+        <table id="boletinesTable" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Número Matrícula</th>
+                    <th>Ciclo</th>
+                    <th>Jornada</th>
+                    <th>Sede</th>
+                    <th>Documento de Identidad</th>
+                    <th>Nombres y Apellidos</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Se cargará dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal para Impresión de Boletín -->
+<div id="modalBoletin" class="modal-boletin">
+    <div class="modal-boletin-content">
+        <div class="modal-boletin-header">
+            <h3><i class="fas fa-file-invoice"></i> Imprimir boletín</h3>
+            <span class="close-boletin-modal">&times;</span>
+        </div>
+        <div class="modal-boletin-body">
+            <div class="boletin-controls">
+                <button class="btn-print-action" onclick="window.print()"><i class="fas fa-print"></i> Imprimir</button>
+                <button class="btn-download-action"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+            </div>
+            
+            <div id="boletinPrintArea" class="boletin-paper">
+                <!-- Estructura del boletín (Imagen 3) -->
+                <div class="boletin-header-print">
+                    <div class="header-top">
+                        <img src="images/logoceis.jpg" alt="Logo Colegio" class="boletin-logo">
+                        <div class="school-info">
+                            <h2>COLEGIO C.E.I.S.</h2>
+                            <p>COLEGIO CENTRO DE INSTRUCCION SISTEMATIZADA</p>
+                            <p class="subtitle">Educación formal flexible para jóvenes y adultos</p>
+                            <p class="resolution">Aprobación oficial 000380 de Junio 07 de 2001 S.E.D. (Cund/marca)</p>
+                            <p class="contact">Carrera 14 No. 15-10 Funza | Teléfono 8760492-3104814605</p>
+                        </div>
+                        <img src="images/logoceis.jpg" alt="Logo Colegio" class="boletin-logo">
+                    </div>
+                    <div class="report-title">
+                        <h3>INFORME DE EVALUACIÓN ESCOLAR</h3>
+                        <p id="printSede">Funza</p>
+                    </div>
+                    <div class="student-info-print">
+                        <p><strong>ALUMNO(A):</strong> <span id="printNombre">CHACIN GONZALEZ YULIETH ISABEL</span></p>
+                        <div class="info-row">
+                            <span><strong>CICLO:</strong> <span id="printCiclo">5</span></span>
+                            <span><strong>JORNADA:</strong> <span id="printJornada">Diurna</span></span>
+                            <span><strong>AÑO:</strong> <span id="printAnio">2024</span></span>
+                            <span><strong>PERIODO:</strong> <span id="printPeriodo">2</span></span>
+                        </div>
+                    </div>
+                    <div class="grading-scale">
+                        <p><strong>VALORACIÓN Y DESEMPEÑOS:</strong></p>
+                        <p>5.0 Superior | 4.0-4.9 Alto | 3.0-3.9 Básico | 1.0-2.9 Bajo</p>
+                    </div>
+                </div>
+
+                <table class="boletin-table">
+                    <thead>
+                        <tr>
+                            <th>ASIGNATURAS</th>
+                            <th>H.S</th>
+                            <th>CONCEPTOS LOGROS</th>
+                            <th>NOTA</th>
+                            <th>FALLAS</th>
+                            <th>DESEMPEÑO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="materia-name">Química</td>
+                            <td>3</td>
+                            <td class="logros-list">
+                                *Comprende y aplica las normas utilizadas para nombrar los hidrocarburos saturados.<br>
+                                *Comprende las propiedades de la materia basada en la configuración electrónica de los átomos.<br>
+                                *Reconoce de manera precisa las diferentes moléculas inorgánicas.<br>
+                                *Identifica los diferentes compuestos orgánicos.
+                            </td>
+                            <td>5.0</td>
+                            <td>0</td>
+                            <td>SUPERIOR</td>
+                        </tr>
+                        <tr>
+                            <td class="materia-name">Física</td>
+                            <td>3</td>
+                            <td class="logros-list">
+                                *Reconoce las características de un vector.<br>
+                                *Realiza conversión de unidades y establece relación entre las mismas.<br>
+                                *Expresa cantidades usando el método de notación científica.
+                            </td>
+                            <td>4.8</td>
+                            <td>0</td>
+                            <td>ALTO</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="boletin-footer-print">
+                    <div class="signatures">
+                        <div class="signature-box">
+                            <div class="line"></div>
+                            <p>Rector / Coordinador</p>
+                        </div>
+                        <div class="signature-box">
+                            <div class="line"></div>
+                            <p>Titular de Grupo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Inyectando estilos específicos para el módulo de boletines */
+    .filters-card .filter-row {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 30px !important;
+        align-items: flex-end !important;
+    }
+
+    .filter-row .field {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .filter-row .field label {
+        font-weight: 700 !important;
+        color: #333 !important;
+        font-size: 1rem !important;
+    }
+
+    .filter-actions-right {
+        grid-column: 1 / -1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 20px !important;
+    }
+
+    .btn-mostrar-grupo {
+        background-color: #0f172a !important; /* Azul oscuro institucional */
+        color: white !important;
+        border: none !important;
+        padding: 12px 30px !important;
+        border-radius: 6px !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        transition: background 0.3s !important;
+    }
+
+    .btn-mostrar-grupo:hover {
+        background-color: #1e293b !important;
+    }
+
+    /* Tabla Estilos */
+    #boletinesTable thead th {
+        background-color: #0f172a !important; /* Azul oscuro solicitado */
+        color: white !important;
+        text-align: center !important;
+        padding: 15px !important;
+        font-size: 0.9rem !important;
+    }
+
+    #boletinesTable tbody td {
+        text-align: center !important;
+        vertical-align: middle !important;
+        padding: 12px !important;
+        border-bottom: 1px solid #eee !important;
+    }
+
+    .btn-boletin {
+        background-color: #28a745 !important; /* Verde solicitado */
+        color: white !important;
+        border: none !important;
+        padding: 8px 15px !important;
+        border-radius: 4px !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 auto !important;
+    }
+
+    .btn-boletin:hover {
+        background-color: #218838 !important;
+    }
+
+    /* Modal Boletín */
+    .modal-boletin {
+        display: none;
+        position: fixed;
+        z-index: 3000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.6);
+        backdrop-filter: blur(5px);
+    }
+
+    .modal-boletin-content {
+        background-color: #fefefe;
+        margin: 2% auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 900px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .modal-boletin-header {
+        padding: 20px 30px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8fafc;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .modal-boletin-header h3 {
+        margin: 0;
+        color: #0f172a;
+    }
+
+    .close-boletin-modal {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close-boletin-modal:hover {
+        color: #000;
+    }
+
+    .modal-boletin-body {
+        padding: 30px;
+    }
+
+    .boletin-controls {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        justify-content: flex-end;
+    }
+
+    .btn-print-action {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .btn-download-action {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    /* Estilos de Impresión del Boletín */
+    .boletin-paper {
+        background: white;
+        padding: 40px;
+        border: 1px solid #ddd;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .boletin-header-print {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .boletin-logo {
+        width: 100px;
+        height: auto;
+    }
+
+    .school-info h2 {
+        margin: 0;
+        font-size: 1.6rem;
+        color: #000;
+    }
+
+    .school-info p {
+        margin: 2px 0;
+        font-size: 0.8rem;
+    }
+
+    .resolution {
+        font-size: 0.75rem !important;
+        font-style: italic;
+    }
+
+    .report-title {
+        margin: 20px 0;
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
+        padding: 10px 0;
+    }
+
+    .report-title h3 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    .student-info-print {
+        text-align: left;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .grading-scale {
+        background-color: #f8fafc;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        font-size: 0.85rem;
+    }
+
+    .boletin-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+    }
+
+    .boletin-table th, .boletin-table td {
+        border: 1px solid #000;
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .boletin-table th {
+        background-color: #eee;
+    }
+
+    .materia-name {
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .logros-list {
+        text-align: left;
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .boletin-footer-print {
+        margin-top: 50px;
+    }
+
+    .signatures {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .signature-box {
+        width: 200px;
+        text-align: center;
+    }
+
+    .signature-box .line {
+        border-top: 1px solid #000;
+        margin-bottom: 5px;
+    }
+
+    .signature-box p {
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        #boletinPrintArea, #boletinPrintArea * {
+            visibility: visible;
+        }
+        #boletinPrintArea {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            border: none;
+        }
+        .modal-boletin {
+            position: absolute;
+            background: white;
+        }
+    }
+</style>
+
+<script src="js/boletines.js"></script>

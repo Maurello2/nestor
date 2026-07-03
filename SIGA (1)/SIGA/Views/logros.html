@@ -1,0 +1,116 @@
+<div class="page-header">
+    <div class="page-title">
+        <h1>Administrar Logros / Indicadores</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" data-page="home.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="breadcrumb-item active">Currículo / Logros</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="card table-card">
+        <div class="card-header-actions">
+            <button class="btn-primary-dashboard" id="btnAgregarLogro">
+                <i class="fas fa-plus-circle"></i> Agregar logro
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table id="logrosTable" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Materia</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar Logro -->
+<div id="modalAgregarLogro" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-trophy"></i> Agregar logro / indicador</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <form id="formAgregarLogro">
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-hashtag"></i></span>
+                    <input type="number" placeholder="Código del indicador" name="nuevoCodIndicador" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-align-left"></i></span>
+                    <textarea name="nuevoDescripIndicador" placeholder="Descripción del logro / indicador" rows="3" required style="resize:vertical;"></textarea>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-book"></i></span>
+                    <select name="nuevoCodMateria" id="selectMateriaLogro" required>
+                        <option value="">Seleccionar Materia</option>
+                        <!-- Dynamic options -->
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-toggle-on"></i></span>
+                    <select name="nuevoEstadoIndicador" required>
+                        <option value="Activado">Activado</option>
+                        <option value="Desactivado">Desactivado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal-btn">Salir</button>
+                <button type="submit" class="btn btn-primary">Guardar logro</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Editar Logro -->
+<div id="modalEditarLogro" class="modal">
+    <div class="modal-content">
+        <div class="modal-header edit">
+            <h2><i class="fas fa-edit"></i> Editar logro / indicador</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <form id="formEditarLogro">
+            <div class="modal-body">
+                <input type="hidden" id="editarCodIndicador" name="editarCodIndicador">
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-align-left"></i></span>
+                    <textarea id="editarDescripIndicador" name="editarDescripIndicador" rows="3" required style="resize:vertical;"></textarea>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-book"></i></span>
+                    <select id="editarCodMateriaLogro" name="editarCodMateria" required>
+                        <!-- Dynamic -->
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-toggle-on"></i></span>
+                    <select id="editarEstadoIndicador" name="editarEstadoIndicador" required>
+                        <option value="Activado">Activado</option>
+                        <option value="Desactivado">Desactivado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal-btn">Salir</button>
+                <button type="submit" class="btn btn-primary">Modificar logro</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/logros.js"></script>
